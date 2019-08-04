@@ -1,0 +1,108 @@
+// 排序.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+//
+
+/*
+void kk(int k) {
+	for (int i = 1; i <= k; i++) {
+		for (int j = 1; j <= i; j++) {
+			cout << "*" ;
+		}
+		cout <<endl;
+	}
+}
+*/
+
+
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+template <class T>
+int LengthOfArray(T& array){
+	return (sizeof(array) / sizeof(array[0]));
+}                                                                                 /*求数组上界*/
+
+void printArray(int a[],int k,int lengths=10,int lines=5)                         /*打印数组*/
+{
+	for (int i = 0; i <=k-1 ; i++) {
+		cout << setw(lines) << a[i];
+		if ((i + 1) % 5 == 0)cout << endl;
+	}
+	cout << endl;
+}
+
+void insert_rank(int a[],int k)                                               /*插入排序*/
+{
+	int temp = 0;
+	for (int i = 1; i <= k-1;i++) {
+		for (int j = 0; j <= i - 1; j++) {
+			if (a[i] <= a[j]) {
+				temp = a[i]; a[i] = a[j]; a[j] = temp;
+			}
+		}
+	}
+}
+
+void Bubble_rank(int a[], int k)                                               /*冒泡排序*/
+{
+	int temp = 0;
+	for (int i = 1; i <= k-1 ; i++) {
+		for (int j = 1; j <= k - i; j++) {
+			if (a[j-1] > a[j]) {
+				temp = a[j-1]; a[j-1] = a[j]; a[j] = temp;
+			}
+		}
+	}
+}
+
+void Bipartite_rank(int a[], int k,int l=1)                                               /*二分归并排序*/
+{
+
+}
+
+void Quick_rank(int a[], int k)                                               /*快速排序*/
+{
+	 
+}
+
+// 给数组a[]无重复随机赋值，每个元素的随机范围为[rangeL, rangeR] 闭区间
+void generateRandomArray(int a[],int n, int rangeL=1, int rangeR=100) {
+	if (rangeL < rangeR) {
+		srand(time(NULL)); // 随机种子
+		for (int i = 0; i <= n - 1; i++) {
+			part1:a[i] = rand() % (rangeR - rangeL + 1) + rangeL;
+			if (i != 0) {
+				for (int j = 0; j <= i-1; j++) {
+					if (a[i] == a[j])
+						goto part1;
+				}
+			}
+		}
+			
+	}
+	else
+		cout << "输入有误！" << endl;
+}
+
+
+
+
+int main()
+{
+
+	int a[] = { 4,0,2,7,8,9,6,5,3,1 };
+	printArray(a, LengthOfArray(a));
+
+	generateRandomArray(a, LengthOfArray(a));
+	printArray(a, LengthOfArray(a));
+	insert_rank(a, LengthOfArray(a));
+	printArray(a, LengthOfArray(a));
+
+	generateRandomArray(a, LengthOfArray(a));
+	printArray(a, LengthOfArray(a));
+	Bubble_rank(a, LengthOfArray(a));
+	printArray(a, LengthOfArray(a));
+
+    cout << "Hello World!\n";
+}
